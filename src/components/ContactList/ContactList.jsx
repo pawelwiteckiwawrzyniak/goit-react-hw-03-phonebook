@@ -13,16 +13,6 @@ export const ContactList = ({ contacts, filterPhrase, handleDelete }) => {
     return filteredNames;
   };
 
-  /*  const handleLocalStorage = () => {
-    let allContacts = contacts;
-    if (localStorage.getItem('contacts') !== undefined) {
-      const LS = localStorage.getItem('contacts');
-      const LSParse = JSON.parse(LS);
-      allContacts.push(LSParse);
-    }
-    return allContacts;
-  }; */
-
   return (
     <ul className={css.contactList}>
       {filterPhrase === '' ? (

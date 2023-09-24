@@ -6,14 +6,19 @@ import { ContactFilter } from './ContactFilter/ContactFilter';
 
 export class App extends Component {
   state = {
-    contacts: [
-      { name: 'Rosie Simpson', number: '459-12-56', id: 'id-1' },
-      { name: 'Hermione Kline', number: '443-89-12', id: 'id-2' },
-      { name: 'Eden Clements', number: '645-17-79', id: 'id-3' },
-      { name: 'Annie Copeland', number: '227-91-26', id: 'id-4' },
-    ],
+    contacts: [],
     filter: '',
   };
+
+  componentDidMount() {
+    if (localStorage.getItem('contacts') === null) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    } else {
+      const ls = localStorage.getItem('contacts');
+      const lsParse = JSON.parse(ls);
+      this.setState({ contacts: lsParse });
+    }
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -27,23 +32,14 @@ export class App extends Component {
     if (listOfContacts.find(contact => contact === name)) {
       return alert(name + ' is already in your contacts!');
     }
+    const newState = [...this.state.contacts, { name, number, id }];
     this.setState({
-      contacts: [...this.state.contacts, { name, number, id }],
+      contacts: newState,
     });
+    console.log(newState);
     form.elements.name.value = '';
     form.elements.number.value = '';
-
-    let allContacts = this.state.contacts;
-    /* if (localStorage.getItem('contacts') !== null) {
-      const LS = localStorage.getItem('contacts');
-      const LSParse = JSON.parse(LS);
-
-      console.log(LSParse);
-      this.setState(prevState => {
-        return { contacts: LSParse };
-      });
-    } */
-    localStorage.setItem('contacts', JSON.stringify(allContacts));
+    localStorage.setItem('contacts', JSON.stringify(newState));
   };
 
   handleFilter = event => {
