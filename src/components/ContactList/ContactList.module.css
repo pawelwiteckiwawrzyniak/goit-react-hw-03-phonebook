@@ -1,0 +1,32 @@
+.contactList {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.contactList__item {
+  display: flex;
+  align-items: center;
+}
+
+.contactList__item::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: black;
+  margin-right: 10px;
+}
+
+.button {
+  margin-left: 10px;
+  width: 50px;
+  border: 1px rgba(124, 124, 124, 0.986) solid;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.button:active {
+  opacity: 50%;
+}
