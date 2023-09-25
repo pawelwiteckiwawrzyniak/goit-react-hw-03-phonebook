@@ -36,9 +36,7 @@ export class App extends Component {
     this.setState({
       contacts: newState,
     });
-    console.log(newState);
-    form.elements.name.value = '';
-    form.elements.number.value = '';
+    form.reset();
     localStorage.setItem('contacts', JSON.stringify(newState));
   };
 
@@ -61,14 +59,14 @@ export class App extends Component {
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm handleSubmit={this.handleSubmit}></ContactForm>
+        <ContactForm handleSubmit={this.handleSubmit} />
         <h2>Contacts</h2>
-        <ContactFilter handleFilter={this.handleFilter}></ContactFilter>
+        <ContactFilter handleFilter={this.handleFilter} />
         <ContactList
           contacts={this.state.contacts}
           filterPhrase={this.state.filter}
           handleDelete={this.handleDelete}
-        ></ContactList>
+        />
       </div>
     );
   }

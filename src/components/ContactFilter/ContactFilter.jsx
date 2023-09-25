@@ -9,7 +9,7 @@ export const ContactFilter = ({ handleFilter }) => (
       type="text"
       name="filter"
       onChange={handleFilter}
-    ></input>
+    />
   </div>
 );
 

@@ -1,53 +1,28 @@
 import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
-import { Fragment } from 'react';
 
 export const ContactList = ({ contacts, filterPhrase, handleDelete }) => {
   const handleFilteredList = () => {
-    let filteredNames = [];
-    contacts.forEach(contact => {
-      if (contact.name.toLowerCase().includes(filterPhrase)) {
-        filteredNames.push(contact);
-      }
-    });
-    return filteredNames;
+    if (filterPhrase === '') return contacts;
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filterPhrase)
+    );
   };
-
   return (
     <ul className={css.contactList}>
-      {filterPhrase === '' ? (
-        <Fragment>
-          {contacts.map(item => (
-            <li key={item.id} className={css.contactList__item}>
-              {item.name}: {item.number}
-              <button
-                type="button"
-                onClick={handleDelete}
-                id={item.id}
-                className={css.button}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </Fragment>
-      ) : (
-        <Fragment>
-          {handleFilteredList().map(item => (
-            <li key={item.id} className={css.contactList__item}>
-              {item.name}: {item.number}
-              <button
-                type="button"
-                onClick={handleDelete}
-                id={item.id}
-                className={css.button}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </Fragment>
-      )}
+      {handleFilteredList().map(item => (
+        <li key={item.id} className={css.contactList__item}>
+          {item.name}: {item.number}
+          <button
+            type="button"
+            onClick={handleDelete}
+            id={item.id}
+            className={css.button}
+          >
+            Delete
+          </button>
+        </li>
+      ))}
     </ul>
   );
 };
