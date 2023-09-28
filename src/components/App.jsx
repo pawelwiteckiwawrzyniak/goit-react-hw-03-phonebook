@@ -20,6 +20,12 @@ export class App extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   handleSubmit = event => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -38,6 +44,7 @@ export class App extends Component {
     });
     form.reset();
     localStorage.setItem('contacts', JSON.stringify(newState));
+    console.log(this.state.contacts);
   };
 
   handleFilter = event => {
@@ -51,8 +58,9 @@ export class App extends Component {
     const contacts = this.state.contacts;
     contacts.splice(index, 1);
     this.setState({ contacts: contacts });
-    let allContacts = this.state.contacts;
-    localStorage.setItem('contacts', JSON.stringify(allContacts));
+    console.log(this.state.contacts);
+    /* let allContacts = this.state.contacts; */
+    /* localStorage.setItem('contacts', JSON.stringify(allContacts)); */
   };
 
   render() {
