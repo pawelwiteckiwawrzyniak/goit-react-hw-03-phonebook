@@ -21,9 +21,9 @@ export class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts) {
+    const lsParse = JSON.parse(localStorage.getItem('contacts'));
+    if (lsParse !== this.state.contacts)
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-    }
   }
 
   handleSubmit = event => {
@@ -56,6 +56,7 @@ export class App extends Component {
     const contacts = this.state.contacts;
     contacts.splice(index, 1);
     this.setState({ contacts: contacts });
+    console.log(contacts);
   };
 
   render() {
